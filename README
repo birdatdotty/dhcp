@@ -1,0 +1,6 @@
+touch acconfig.h config.h.bot config.h.top config.h
+
+autoheader
+aclocal
+autoconf
+automake
