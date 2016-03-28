@@ -4,3 +4,4 @@ autoheader
 aclocal
 autoconf
 automake
+# if your dnsupdate - /usr/bin/nsupdate
