@@ -663,6 +663,8 @@ INSTALL_DATA
 INSTALL_SCRIPT
 INSTALL_PROGRAM
 LIBOBJS
+DEBUG_FALSE
+DEBUG_TRUE
 EGREP
 GREP
 CPP
@@ -715,6 +717,7 @@ SHELL'
 ac_subst_files=''
 ac_user_opts='
 enable_option_checking
+enable_debug
 enable_dependency_tracking
 enable_silent_rules
 '
@@ -1341,6 +1344,7 @@ Optional Features:
   --disable-option-checking  ignore unrecognized --enable/--with options
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-debug          enable debugging, default: no
   --enable-dependency-tracking
                           do not reject slow dependency extractors
   --disable-dependency-tracking
@@ -3562,6 +3566,28 @@ _ACEOF
 fi
 
 
+# debug
+# Check whether --enable-debug was given.
+if test "${enable_debug+set}" = set; then :
+  enableval=$enable_debug; case "${enableval}" in
+             yes) debug=true ;;
+             no)  debug=false ;;
+             *)   as_fn_error $? "bad value ${enableval} for --enable-debug" "$LINENO" 5 ;;
+esac
+else
+  debug=false
+fi
+
+
+ if test x"$debug" = x"true"; then
+  DEBUG_TRUE=
+  DEBUG_FALSE='#'
+else
+  DEBUG_TRUE='#'
+  DEBUG_FALSE=
+fi
+
+
 # Checks for library functions.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for error_at_line" >&5
 $as_echo_n "checking for error_at_line... " >&6; }
@@ -4561,6 +4587,10 @@ LIBOBJS=$ac_libobjs
 LTLIBOBJS=$ac_ltlibobjs
 
 
+if test -z "${DEBUG_TRUE}" && test -z "${DEBUG_FALSE}"; then
+  as_fn_error $? "conditional \"DEBUG\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking that generated files are newer than configure" >&5
 $as_echo_n "checking that generated files are newer than configure... " >&6; }
    if test -n "$am_sleep_pid"; then
