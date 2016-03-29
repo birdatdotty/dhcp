@@ -14,6 +14,7 @@ void nsupdate_add (struct host_ip *ip,
   char* str;
   str = strdup (get_header_server(server));
   strcat (str, host_ip_dhcp_add_ip(ip, server, hostname));
+  strcat (str, NSUPDATE_END);
   strcat (str, host_ip_dhcp_add_arpa(ip, server, hostname));
   strcat (str, NSUPDATE_END);
   

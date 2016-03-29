@@ -8,4 +8,4 @@
 #define NSUPDATE_FULL "/bin/echo"
 #define NSUPDATE "nsupdate"
 #define NSUPDATE_OPT "-g"
-#define NSUPDATE_END "send\n"
+#define NSUPDATE_END "" //send\n"

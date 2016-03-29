@@ -63,7 +63,7 @@
 #define NSUPDATE_FULL "/usr/bin/nsupdate"
 
 /* arg for nsupdate */
-#define NSUPDATE_OPT "-g"
+#define NSUPDATE_OPT ""
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT "bird@dotty.su"
@@ -102,5 +102,5 @@
 /* #undef size_t */
 #define NSUPDATE_FULL "/usr/bin/nsupdate"
 #define NSUPDATE "nsupdate"
-#define NSUPDATE_OPT "-g"
-#define NSUPDATE_END "send\n"
+#define NSUPDATE_OPT ""
+#define NSUPDATE_END "" //send\n"

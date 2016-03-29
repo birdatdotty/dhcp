@@ -16,7 +16,7 @@ struct server_setting* server_setting_create ()
 
 char* get_header_server (struct server_setting* srv)
 {
-  char* str = (char*) malloc (16);
+  char* str = (char*) malloc (64);
   sprintf (str,
            "server %s\n",
            srv->host);

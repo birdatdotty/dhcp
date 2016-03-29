@@ -42,7 +42,7 @@ AM_INIT_AUTOMAKE([1.12 foreign no-define])
 # define
 AC_DEFINE([NSUPDATE_FULL], "/usr/bin/nsupdate", [nsupdate full path])
 AC_DEFINE([NSUPDATE], "nsupdate", [name command])
-AC_DEFINE([NSUPDATE_OPT], "-g", [arg for nsupdate])
+AC_DEFINE([NSUPDATE_OPT], "", [arg for nsupdate])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
