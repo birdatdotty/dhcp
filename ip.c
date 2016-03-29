@@ -27,7 +27,7 @@ host_ip_create (char *str)
 
 char* get_ip (struct host_ip* ip)
 {
-  char* str = (char*) malloc (16);
+  char* str = (char*) malloc (128);
   sprintf (str, "%d.%d.%d.%d",
            ip->oct0,
            ip->oct1,
@@ -39,7 +39,7 @@ char* get_ip (struct host_ip* ip)
 
 char* get_arpa_ip (struct host_ip* ip)
 {
-  char* str = (char*) malloc (32);
+  char* str = (char*) malloc (128);
   sprintf (str, "%d.%d.%d.%d.in-addr.arpa.",
            ip->oct3,
            ip->oct2,
