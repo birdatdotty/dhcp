@@ -18,7 +18,12 @@ void nsupdate_add (struct host_ip *ip,
   strcat (str, host_ip_dhcp_add_arpa(ip, server, hostname));
   strcat (str, NSUPDATE_END);
   
-  execl (NSUPDATE_FULL, NSUPDATE, str, NULL);
+  puts (str);
+  FILE *nsupdate = popen (NSUPDATE_FULL, "w"); 
+  fprintf (nsupdate, str);
+  fflush (nsupdate);
+  pclose (nsupdate);
+//  execl (NSUPDATE_FULL, NSUPDATE, str, NULL);
 }
 
 void nsupdate_delete (struct host_ip *ip,
@@ -31,7 +36,11 @@ void nsupdate_delete (struct host_ip *ip,
   strcat (str, host_ip_dhcp_delete_arpa(ip, server, hostname));
   strcat (str, NSUPDATE_END);
   
-  execl (NSUPDATE_FULL, NSUPDATE, str, NULL);
+  FILE *nsupdate = popen (NSUPDATE_FULL, "w"); 
+  fprintf (nsupdate, str);
+  fflush (nsupdate);
+  pclose (nsupdate);
+//  execl (NSUPDATE_FULL, NSUPDATE, str, NULL);
 }
 
 int
