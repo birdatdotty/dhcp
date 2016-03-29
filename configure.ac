@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([dhsp-wrapper], [0.1], [bird@dotty.su])
+AC_INIT([dhsp-wrapper], [0.3], [bird@dotty.su])
 AC_CONFIG_SRCDIR([config.h])
 AC_CONFIG_HEADERS([config.h])
 
@@ -40,9 +40,9 @@ AC_DEFINE(__BSD_VISIBLE, 1, [Define on FreeBSD to activate all library features]
 AM_INIT_AUTOMAKE([1.12 foreign no-define])
 
 # define
-AC_DEFINE([NSUPDATE_FULL], "/usr/bin/nsupdate -g", [nsupdate full path])
-AC_DEFINE([NSUPDATE], "nsupdate", [name command])
-AC_DEFINE([NSUPDATE_OPT], "send\n", [arg for nsupdate])
+#AC_DEFINE([NSUPDATE_FULL], "/usr/bin/nsupdate -g", [nsupdate full path])
+#AC_DEFINE([NSUPDATE], "nsupdate", [name command])
+#AC_DEFINE([NSUPDATE_OPT], "send\n", [arg for nsupdate])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

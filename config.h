@@ -100,7 +100,7 @@
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 /* #undef size_t */
-#define NSUPDATE_FULL "/usr/bin/nsupdate -g"
+#define NSUPDATE_FULL "/usr/bin/nsupdate"
 #define NSUPDATE "nsupdate"
 #define NSUPDATE_OPT ""
 #define NSUPDATE_END "send\n"

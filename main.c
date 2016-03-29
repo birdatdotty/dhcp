@@ -52,11 +52,11 @@ main (int argc, char ** argv)
   
   server = server_setting_create ();
 
-  if (argv[1])
+  if (argv[2])
     {
-      ip = host_ip_create (argv[1]);
-      if (argv[2])
-        hostname = argv[2];
+      ip = host_ip_create (argv[2]);
+      if (argv[3])
+        hostname = argv[3];
       else
         {
           hostname = "Any_host";
@@ -75,18 +75,19 @@ main (int argc, char ** argv)
   strcat (str, host_ip_dhcp_add_arpa(ip, server, hostname));
   strcat (str, NSUPDATE_END);
 
-  if (!strcmp (argv[0], "add"))
+  if (!strcmp (argv[1], "add"))
     nsupdate_add (ip, server, hostname);
   
-  if (!strcmp (argv[0], "delete"))
+  if (!strcmp (argv[1], "delete"))
     nsupdate_delete (ip, server, hostname);
   
-  if (!strcmp (argv[0], "./add"))
+/*  if (!strcmp (argv[1], "./add"))
     nsupdate_add (ip, server, hostname);
   
-  if (!strcmp (argv[0], "./delete"))
+  if (!strcmp (argv[1], "./delete"))
      nsupdate_delete (ip, server, hostname);
   
+*/
   host_ip_destroy (ip);
   
   return EXIT_SUCCESS;
