@@ -6,7 +6,7 @@ struct server_setting {
   char* domain;
 };
 
-struct server_setting* server_setting_create ();
+struct server_setting* server_setting_create (char* host, char* domain);
 char* get_header_server (struct server_setting* srv);
 
 #endif
