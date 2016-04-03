@@ -30,7 +30,7 @@ void nsupdate_add (struct host_ip *ip,
   strcat (str, NSUPDATE_END);
   
   FILE *nsupdate = popen (NSUPDATE_FULL, "w"); 
-  
+  puts (str);
   fprintf (nsupdate, str);
   fflush (nsupdate);
   pclose (nsupdate);
@@ -59,7 +59,7 @@ int main (int argc, char ** argv)
   if (argc == 3)
     create_pipe (argv[1], argv[2]);
   
-  printf ("Usage: %s path_to_socket domain.local\n  use: echo 1.2.3.4 hostname > path_to_socket\n\n", argv[0]);
+  printf ("Usage: %s path_to_socket domain.local\n  use: echo add/delete 1.2.3.4 hostname > path_to_socket\n\n", argv[0]);
   return EXIT_SUCCESS;
 }
 
@@ -141,23 +141,25 @@ void nsupdate_send (char* str, char* domain)
 {
   char* action = malloc (50);
   char* ip_addr = malloc (100);
-  char* host_name = malloc (50);
+  char* host_name = malloc (100);
   
   // action
   char* n_action = strchr (str, ' ');
   memcpy (action, str, (n_action - str));
-  
+  puts ();
   // ip-address
   char* n_ip = strchr (n_action + 1, ' ');
   memcpy (ip_addr, n_action + 1, (n_ip - n_action - 1));
-  
+  puts ("153");
   // hostname
   char* n_hostname_space = strchr (n_ip + 1, ' ');
   if (n_hostname_space)
     *n_hostname_space = 0;
+  
   char* n_hostname_dot = strchr (n_ip + 1, '.');
   if (n_hostname_dot)
       *n_hostname_dot = 0;
+  
   char* n_hostname_endline = strchr (n_ip + 1, '\n');
   if (n_hostname_endline)
     *n_hostname_endline = 0;
@@ -165,7 +167,7 @@ void nsupdate_send (char* str, char* domain)
   char* n_hostname = n_hostname_0;
   
   memcpy (host_name, n_ip + 1, (host_name, n_ip + 1, (n_hostname - n_ip - 1)));
-  
+  printf ("hostname = %s\n", host_name);
   struct server_setting* server;
   server = server_setting_create ("127.0.0.1", domain);
   struct host_ip* ip = host_ip_create (ip_addr);
