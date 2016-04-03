@@ -16,8 +16,8 @@
 
 #define SIZE_STR 256
 
-void nsupdate_send (char* str);
-void create_pipe (char* path);
+void nsupdate_send (char* str, char* domain);
+void create_pipe (char* path, char* domain);
 void nsupdate_add (struct host_ip *ip,
                    struct server_setting* server,
                    char* hostname)
@@ -29,9 +29,8 @@ void nsupdate_add (struct host_ip *ip,
   strcat (str, host_ip_dhcp_add_arpa(ip, server, hostname));
   strcat (str, NSUPDATE_END);
   
-  puts (str);
   FILE *nsupdate = popen (NSUPDATE_FULL, "w"); 
-  puts (str);
+  
   fprintf (nsupdate, str);
   fflush (nsupdate);
   pclose (nsupdate);
@@ -57,10 +56,10 @@ void nsupdate_delete (struct host_ip *ip,
 
 int main (int argc, char ** argv)
 {
-  if (argc == 2)
-    create_pipe (argv[1]);
+  if (argc == 3)
+    create_pipe (argv[1], argv[2]);
   
-  printf ("Usage: %s path_to_socket\n  use: echo 1.2.3.4 hostname > path_to_socket\n\n", argv[0]);
+  printf ("Usage: %s path_to_socket domain.local\n  use: echo 1.2.3.4 hostname > path_to_socket\n\n", argv[0]);
   return EXIT_SUCCESS;
 }
 
@@ -116,7 +115,7 @@ main_old (int argc, char ** argv)
   return EXIT_SUCCESS;
 }
 
-void create_pipe (char* path)
+void create_pipe (char* path, char * domain)
 {
   char* buffer = malloc (SIZE_STR);
   char* action = malloc (10);
@@ -133,15 +132,16 @@ void create_pipe (char* path)
   while (1)
   {
     read (fd, buffer, SIZE_STR);
-    nsupdate_send (buffer);
+    puts (buffer);
+    nsupdate_send (buffer, domain);
   }
 }
 
-void nsupdate_send (char* str)
+void nsupdate_send (char* str, char* domain)
 {
-  char* action = malloc (10);
-  char* ip_addr = malloc (20);
-  char* host_name = malloc (20);
+  char* action = malloc (50);
+  char* ip_addr = malloc (100);
+  char* host_name = malloc (50);
   
   // action
   char* n_action = strchr (str, ' ');
@@ -167,7 +167,7 @@ void nsupdate_send (char* str)
   memcpy (host_name, n_ip + 1, (host_name, n_ip + 1, (n_hostname - n_ip - 1)));
   
   struct server_setting* server;
-  server = server_setting_create ("127.0.0.1", "dotty.su");
+  server = server_setting_create ("127.0.0.1", domain);
   struct host_ip* ip = host_ip_create (ip_addr);
   
   if (!strcmp (action, "add"))
