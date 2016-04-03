@@ -23,6 +23,7 @@ void nsupdate_add (struct host_ip *ip,
                    char* hostname)
 {
   char* str;
+  puts (NSUPDATE_FULL);
   str = strdup (get_header_server(server));
   strcat (str, host_ip_dhcp_add_ip(ip, server, hostname));
   strcat (str, NSUPDATE_END);
@@ -30,10 +31,13 @@ void nsupdate_add (struct host_ip *ip,
   strcat (str, NSUPDATE_END);
   
   FILE *nsupdate = popen (NSUPDATE_FULL, "w"); 
+  puts ("----------------");
   puts (str);
+  puts ("----------------");
   fprintf (nsupdate, str);
   fflush (nsupdate);
   pclose (nsupdate);
+  sleep (1);
 //  execl (NSUPDATE_FULL, NSUPDATE, str, NULL);
 }
 
@@ -133,6 +137,7 @@ void create_pipe (char* path, char * domain)
   {
     read (fd, buffer, SIZE_STR);
     puts (buffer);
+    write (fd, 0, 1);
     nsupdate_send (buffer, domain);
   }
 }
@@ -141,12 +146,12 @@ void nsupdate_send (char* str, char* domain)
 {
   char* action = malloc (50);
   char* ip_addr = malloc (100);
-  char* host_name = malloc (100);
+  char* host_name = malloc (200);
   
   // action
   char* n_action = strchr (str, ' ');
   memcpy (action, str, (n_action - str));
-  puts ();
+  
   // ip-address
   char* n_ip = strchr (n_action + 1, ' ');
   memcpy (ip_addr, n_action + 1, (n_ip - n_action - 1));
