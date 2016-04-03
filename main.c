@@ -127,7 +127,6 @@ void create_pipe (char* path, char * domain)
   char* host_name = malloc (20);
   
   int status = mkfifo(path, S_IWUSR | S_IRUSR);
-  int fd = open(path, O_RDONLY);
   
   if (status)
     if (errno != 17)
@@ -135,10 +134,11 @@ void create_pipe (char* path, char * domain)
   
   while (1)
   {
+    int fd = open(path, O_RDONLY);
     read (fd, buffer, SIZE_STR);
     puts (buffer);
-    write (fd, 0, 1);
     nsupdate_send (buffer, domain);
+    close (fd);
   }
 }
 
