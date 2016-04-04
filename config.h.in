@@ -5,6 +5,8 @@
 /* Версия пакета.   */
 #undef VERSION
 
+/* Debug Mode */
+#undef DEBUG
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
@@ -55,14 +57,17 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
+/* No-debug Mode */
+#undef NDEBUG
+
 /* name command */
 #undef NSUPDATE
 
+/* arg for nsupdate */
+#undef NSUPDATE_END
+
 /* nsupdate full path */
 #undef NSUPDATE_FULL
-
-/* arg for nsupdate */
-#undef NSUPDATE_OPT
 
 /* Define to the address where bug reports for this package should be sent. */
 #undef PACKAGE_BUGREPORT
@@ -97,9 +102,8 @@
 /* Define to rpl_malloc if the replacement function should be used. */
 #undef malloc
 
+/* Debug Mode */
+#undef sdf
+
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 #undef size_t
-#define NSUPDATE_FULL "/usr/bin/nsupdate"
-#define NSUPDATE "nsupdate"
-#define NSUPDATE_OPT "-g"
-#define NSUPDATE_END "send\n"

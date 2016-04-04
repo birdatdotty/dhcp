@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -7,8 +8,10 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include <err.h>
 #include <errno.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "ip.h"
 #include "server.h"
@@ -23,18 +26,25 @@ void nsupdate_add (struct host_ip *ip,
                    char* hostname)
 {
   char* str;
+  #ifdef DEBUG
   puts (NSUPDATE_FULL);
+  #endif
   str = strdup (get_header_server(server));
   strcat (str, host_ip_dhcp_add_ip(ip, server, hostname));
   strcat (str, NSUPDATE_END);
   strcat (str, host_ip_dhcp_add_arpa(ip, server, hostname));
   strcat (str, NSUPDATE_END);
   
-  FILE *nsupdate = popen (NSUPDATE_FULL, "w"); 
+  #ifdef DEBUG
+  puts (str);
+  #endif
+  FILE *nsupdate = popen (NSUPDATE_FULL, "w");
+  #ifdef DEBUG
   puts ("----------------");
   puts (str);
   puts ("----------------");
-  fprintf (nsupdate, str);
+  #endif
+  fprintf (nsupdate, "%s", str);
   fflush (nsupdate);
   pclose (nsupdate);
   sleep (1);
@@ -52,7 +62,7 @@ void nsupdate_delete (struct host_ip *ip,
   strcat (str, NSUPDATE_END);
   
   FILE *nsupdate = popen (NSUPDATE_FULL, "w"); 
-  fprintf (nsupdate, str);
+  fprintf (nsupdate, "%s\n", str);
   fflush (nsupdate);
   pclose (nsupdate);
 //  execl (NSUPDATE_FULL, NSUPDATE, str, NULL);
@@ -60,6 +70,9 @@ void nsupdate_delete (struct host_ip *ip,
 
 int main (int argc, char ** argv)
 {
+  #ifdef DEBUG
+  puts ("debug is enabled");
+  #endif
   if (argc == 3)
     create_pipe (argv[1], argv[2]);
   
@@ -135,10 +148,17 @@ void create_pipe (char* path, char * domain)
   while (1)
   {
     int fd = open(path, O_RDONLY);
-    read (fd, buffer, SIZE_STR);
-    puts (buffer);
-    nsupdate_send (buffer, domain);
-    close (fd);
+    int status = read (fd, buffer, SIZE_STR);
+    if (status)
+      {
+        #ifdef DEBUG
+        puts (buffer);
+        #endif
+        nsupdate_send (buffer, domain);
+        close (fd);
+      }
+    else
+      printf ("did not open %s\n\n", path);
   }
 }
 
@@ -155,16 +175,18 @@ void nsupdate_send (char* str, char* domain)
   // ip-address
   char* n_ip = strchr (n_action + 1, ' ');
   memcpy (ip_addr, n_action + 1, (n_ip - n_action - 1));
-  puts ("153");
+  
   // hostname
   char* n_hostname_space = strchr (n_ip + 1, ' ');
   if (n_hostname_space)
     *n_hostname_space = 0;
-  
+  #ifdef DEBUG
+  #endif
   char* n_hostname_dot = strchr (n_ip + 1, '.');
   if (n_hostname_dot)
       *n_hostname_dot = 0;
-  
+  #ifdef DEBUG
+  #endif  
   char* n_hostname_endline = strchr (n_ip + 1, '\n');
   if (n_hostname_endline)
     *n_hostname_endline = 0;
@@ -172,7 +194,10 @@ void nsupdate_send (char* str, char* domain)
   char* n_hostname = n_hostname_0;
   
   memcpy (host_name, n_ip + 1, (host_name, n_ip + 1, (n_hostname - n_ip - 1)));
+  #ifdef DEBUG
   printf ("hostname = %s\n", host_name);
+  printf ("Domain: %s\n", domain);
+  #endif
   struct server_setting* server;
   server = server_setting_create ("127.0.0.1", domain);
   struct host_ip* ip = host_ip_create (ip_addr);
