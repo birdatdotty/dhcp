@@ -7,7 +7,7 @@
 /* #undef VERSION */
 
 /* Debug Mode */
-#define DEBUG /**/
+/* #undef DEBUG */
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
@@ -59,7 +59,7 @@
 #define HAVE_UNISTD_H 1
 
 /* No-debug Mode */
-/* #undef NDEBUG */
+#define NDEBUG /**/
 
 /* name command */
 #define NSUPDATE "nsupdate -g"
