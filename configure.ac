@@ -46,13 +46,24 @@ else
     AC_DEFINE([NDEBUG],[],[No-debug Mode])
     AM_CXXFLAGS="$AM_CXXFLAGS -O3"
 fi
+#AC_MSG_CHECKING([set nsupdate. Default "/usr/bin/nsupdate -g"])
 #AC_DEFINE([DEBUG],[],[Debug Mode])
+nsupdate_full="/usr/bin/nsupdate -g"
+AC_ARG_ENABLE(nsupdate,
+  [ --enable-nsupdate="/usr/bin/nsupdate -g"],
+  nsupdate_full=$enableval)
 
+nsupdate_end="nsupdate -g"
+AC_ARG_ENABLE(nsupdate_end,
+  [ --enable-nsupdate_end="send\n"],
+  nsupdate_end=$enableval)
+
+#echo ${ENABLE_LIBADA}
 ##########################################################################
 # define
-AC_DEFINE([NSUPDATE_FULL], "/usr/bin/nsupdate -g", [nsupdate full path])
-AC_DEFINE([NSUPDATE], "nsupdate -g", [name command])
-AC_DEFINE([NSUPDATE_END], "send\n", [arg for nsupdate])
+AC_DEFINE_UNQUOTED([NSUPDATE_FULL], "$nsupdate_full", [nsupdate full path])
+#AC_DEFINE([NSUPDATE], "nsupdate -g", [name command])
+AC_DEFINE_UNQUOTED([NSUPDATE_END], "$nsupdate_end", [arg for nsupdate])
 AC_DEFINE([sdf],[asdas],[Debug Mode])
 
 AC_CONFIG_FILES([Makefile])

@@ -718,6 +718,8 @@ enable_option_checking
 enable_dependency_tracking
 enable_silent_rules
 enable_debug
+enable_nsupdate
+enable_nsupdate_end
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1349,6 +1351,8 @@ Optional Features:
   --enable-silent-rules   less verbose build output (undo: "make V=1")
   --disable-silent-rules  verbose build output (undo: "make V=0")
   --enable-debug          enable debug data generation (def=no)
+ --enable-nsupdate="/usr/bin/nsupdate -g"
+ --enable-nsupdate_end="send\n"
 
 Some influential environment variables:
   CC          C compiler command
@@ -4469,18 +4473,35 @@ $as_echo "#define NDEBUG /**/" >>confdefs.h
 
     AM_CXXFLAGS="$AM_CXXFLAGS -O3"
 fi
+#AC_MSG_CHECKING([set nsupdate. Default "/usr/bin/nsupdate -g"])
 #AC_DEFINE([DEBUG],[],[Debug Mode])
+nsupdate_full="/usr/bin/nsupdate -g"
+# Check whether --enable-nsupdate was given.
+if test "${enable_nsupdate+set}" = set; then :
+  enableval=$enable_nsupdate; nsupdate_full=$enableval
+fi
 
+
+nsupdate_end="nsupdate -g"
+# Check whether --enable-nsupdate_end was given.
+if test "${enable_nsupdate_end+set}" = set; then :
+  enableval=$enable_nsupdate_end; nsupdate_end=$enableval
+fi
+
+
+#echo ${ENABLE_LIBADA}
 ##########################################################################
 # define
 
-$as_echo "#define NSUPDATE_FULL \"/usr/bin/nsupdate -g\"" >>confdefs.h
+cat >>confdefs.h <<_ACEOF
+#define NSUPDATE_FULL "$nsupdate_full"
+_ACEOF
 
+#AC_DEFINE([NSUPDATE], "nsupdate -g", [name command])
 
-$as_echo "#define NSUPDATE \"nsupdate -g\"" >>confdefs.h
-
-
-$as_echo "#define NSUPDATE_END \"send\\n\"" >>confdefs.h
+cat >>confdefs.h <<_ACEOF
+#define NSUPDATE_END "$nsupdate_end"
+_ACEOF
 
 
 $as_echo "#define sdf asdas" >>confdefs.h
