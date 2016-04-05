@@ -40,9 +40,9 @@ void nsupdate_add (struct host_ip *ip,
   #endif
   FILE *nsupdate = popen (NSUPDATE_FULL, "w");
   #ifdef DEBUG
-  puts ("----------------");
+  puts ("-i---------------");
   puts (str);
-  puts ("----------------");
+  puts ("-i---------------");
   #endif
   fprintf (nsupdate, "%s", str);
   fflush (nsupdate);

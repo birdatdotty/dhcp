@@ -1351,8 +1351,8 @@ Optional Features:
   --enable-silent-rules   less verbose build output (undo: "make V=1")
   --disable-silent-rules  verbose build output (undo: "make V=0")
   --enable-debug          enable debug data generation (def=no)
- --enable-nsupdate="/usr/bin/nsupdate -g"
- --enable-nsupdate_end="send\n"
+  --enable-nsupdate="/usr/bin/nsupdate -g"
+  --enable-nsupdate_end="send\n"
 
 Some influential environment variables:
   CC          C compiler command
@@ -4482,7 +4482,7 @@ if test "${enable_nsupdate+set}" = set; then :
 fi
 
 
-nsupdate_end="nsupdate -g"
+nsupdate_end="send\n"
 # Check whether --enable-nsupdate_end was given.
 if test "${enable_nsupdate_end+set}" = set; then :
   enableval=$enable_nsupdate_end; nsupdate_end=$enableval

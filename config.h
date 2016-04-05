@@ -62,7 +62,7 @@
 #define NDEBUG /**/
 
 /* name command */
-#define NSUPDATE "nsupdate -g"
+/* #undef NSUPDATE */
 
 /* arg for nsupdate */
 #define NSUPDATE_END "send\n"

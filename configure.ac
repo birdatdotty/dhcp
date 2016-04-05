@@ -50,12 +50,12 @@ fi
 #AC_DEFINE([DEBUG],[],[Debug Mode])
 nsupdate_full="/usr/bin/nsupdate -g"
 AC_ARG_ENABLE(nsupdate,
-  [ --enable-nsupdate="/usr/bin/nsupdate -g"],
+  [  --enable-nsupdate="/usr/bin/nsupdate -g"],
   nsupdate_full=$enableval)
 
-nsupdate_end="nsupdate -g"
+nsupdate_end="send\n"
 AC_ARG_ENABLE(nsupdate_end,
-  [ --enable-nsupdate_end="send\n"],
+  [  --enable-nsupdate_end="send\n"],
   nsupdate_end=$enableval)
 
 #echo ${ENABLE_LIBADA}
