@@ -60,14 +60,14 @@
 /* No-debug Mode */
 #undef NDEBUG
 
-/* name command */
-#undef NSUPDATE
-
-/* arg for nsupdate */
+/* end for nsupdate (default="send\n") */
 #undef NSUPDATE_END
 
-/* nsupdate full path */
+/* set nsupdate full path(default="/usr/bin/nsupdate -g") */
 #undef NSUPDATE_FULL
+
+/* set nsupdate server (default="127.0.0.1") */
+#undef NSUPDATE_SERVER
 
 /* Define to the address where bug reports for this package should be sent. */
 #undef PACKAGE_BUGREPORT

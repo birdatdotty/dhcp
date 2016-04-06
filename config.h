@@ -61,14 +61,14 @@
 /* No-debug Mode */
 #define NDEBUG /**/
 
-/* name command */
-/* #undef NSUPDATE */
-
-/* arg for nsupdate */
+/* end for nsupdate (default="send\n") */
 #define NSUPDATE_END "send\n"
 
-/* nsupdate full path */
+/* set nsupdate full path(default="/usr/bin/nsupdate -g") */
 #define NSUPDATE_FULL "/usr/bin/nsupdate -g"
+
+/* set nsupdate server (default="127.0.0.1") */
+#define NSUPDATE_SERVER "127.0.0.1"
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT "bird@dotty.su"

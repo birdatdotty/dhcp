@@ -149,7 +149,7 @@ void nsupdate_send (char* str, char* domain)
   printf ("Domain: %s\n", domain);
   #endif
   struct server_setting* server;
-  server = server_setting_create ("127.0.0.1", domain);
+  server = server_setting_create (NSUPDATE_SERVER, domain);
   struct host_ip* ip = host_ip_create (ip_addr);
   
   if (!strcmp (action, "add"))

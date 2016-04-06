@@ -719,6 +719,7 @@ enable_dependency_tracking
 enable_silent_rules
 enable_debug
 enable_nsupdate
+enable_nsupdate_server
 enable_nsupdate_end
 '
       ac_precious_vars='build_alias
@@ -1352,6 +1353,7 @@ Optional Features:
   --disable-silent-rules  verbose build output (undo: "make V=0")
   --enable-debug          enable debug data generation (def=no)
   --enable-nsupdate="/usr/bin/nsupdate -g"
+  --enable-nsupdate_server="127.0.0.1"
   --enable-nsupdate_end="send\n"
 
 Some influential environment variables:
@@ -4482,6 +4484,13 @@ if test "${enable_nsupdate+set}" = set; then :
 fi
 
 
+nsupdate_server="127.0.0.1"
+# Check whether --enable-nsupdate_server was given.
+if test "${enable_nsupdate_server+set}" = set; then :
+  enableval=$enable_nsupdate_server; nsupdate_server=$enableval
+fi
+
+
 nsupdate_end="send\n"
 # Check whether --enable-nsupdate_end was given.
 if test "${enable_nsupdate_end+set}" = set; then :
@@ -4495,6 +4504,11 @@ fi
 
 cat >>confdefs.h <<_ACEOF
 #define NSUPDATE_FULL "$nsupdate_full"
+_ACEOF
+
+
+cat >>confdefs.h <<_ACEOF
+#define NSUPDATE_SERVER "$nsupdate_server"
 _ACEOF
 
 #AC_DEFINE([NSUPDATE], "nsupdate -g", [name command])
