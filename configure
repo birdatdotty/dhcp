@@ -1358,7 +1358,7 @@ Optional Features:
   --enable-nsupdate_server="127.0.0.1"
   --enable-nsupdate_end="send\n"
   --enable-kini_cmd="/usr/bin/kinit"
-  --enable-kini_pwd="password"
+  --enable-kini_pwd="p@Ssw0rd"
 
 Some influential environment variables:
   CC          C compiler command
@@ -4510,7 +4510,7 @@ fi
 
 # Check whether --enable-kini_pwd was given.
 if test "${enable_kini_pwd+set}" = set; then :
-  enableval=$enable_kini_pwd; kini_cmd=$enableval
+  enableval=$enable_kini_pwd; kini_pwd=$enableval
 fi
 
 

@@ -69,7 +69,7 @@ AC_ARG_ENABLE(kini_cmd,
 
 AC_ARG_ENABLE(kini_pwd,
   [  --enable-kini_pwd="p@Ssw0rd"],
-  kini_cmd=$enableval)
+  kini_pwd=$enableval)
 
 ##########################################################################
 # define
