@@ -46,8 +46,7 @@ else
     AC_DEFINE([NDEBUG],[],[No-debug Mode])
     AM_CXXFLAGS="$AM_CXXFLAGS -O3"
 fi
-#AC_MSG_CHECKING([set nsupdate. Default "/usr/bin/nsupdate -g"])
-#AC_DEFINE([DEBUG],[],[Debug Mode])
+
 nsupdate_full="/usr/bin/nsupdate -g"
 AC_ARG_ENABLE(nsupdate,
   [  --enable-nsupdate="/usr/bin/nsupdate -g"],
@@ -63,14 +62,22 @@ AC_ARG_ENABLE(nsupdate_end,
   [  --enable-nsupdate_end="send\n"],
   nsupdate_end=$enableval)
 
-#echo ${ENABLE_LIBADA}
+kini_cmd="/usr/bin/kinit"
+AC_ARG_ENABLE(kini_cmd,
+  [  --enable-kini_cmd="/usr/bin/kinit"],
+  kini_cmd=$enableval)
+
+AC_ARG_ENABLE(kini_pwd,
+  [  --enable-kini_pwd="p@Ssw0rd"],
+  kini_cmd=$enableval)
+
 ##########################################################################
 # define
-AC_DEFINE_UNQUOTED([NSUPDATE_FULL], "$nsupdate_full", [set nsupdate full path(default="/usr/bin/nsupdate -g")])
-AC_DEFINE_UNQUOTED([NSUPDATE_SERVER], "$nsupdate_server", [set nsupdate server (default="127.0.0.1")])
-#AC_DEFINE([NSUPDATE], "nsupdate -g", [name command])
-AC_DEFINE_UNQUOTED([NSUPDATE_END], "$nsupdate_end", [end for nsupdate (default="send\n")])
-AC_DEFINE([sdf],[asdas],[Debug Mode])
+AC_DEFINE_UNQUOTED([NSUPDATE_FULL], "$nsupdate_full", [set nsupdate full path])
+AC_DEFINE_UNQUOTED([NSUPDATE_SERVER], "$nsupdate_server", [set nsupdate server])
+AC_DEFINE_UNQUOTED([NSUPDATE_END], "$nsupdate_end", [end for nsupdate)])
+AC_DEFINE_UNQUOTED([KINIT_CMD], "$kini_cmd", [full kinit cmd])
+AC_DEFINE_UNQUOTED([KINIT_PWD], "$kini_pwd", [password for kinit])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

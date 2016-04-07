@@ -57,16 +57,22 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
+/* full kinit cmd */
+#undef KINIT_CMD
+
+/* password for kinit */
+#undef KINIT_PWD
+
 /* No-debug Mode */
 #undef NDEBUG
 
-/* end for nsupdate (default="send\n") */
+/* end for nsupdate) */
 #undef NSUPDATE_END
 
-/* set nsupdate full path(default="/usr/bin/nsupdate -g") */
+/* set nsupdate full path */
 #undef NSUPDATE_FULL
 
-/* set nsupdate server (default="127.0.0.1") */
+/* set nsupdate server */
 #undef NSUPDATE_SERVER
 
 /* Define to the address where bug reports for this package should be sent. */
@@ -101,9 +107,6 @@
 
 /* Define to rpl_malloc if the replacement function should be used. */
 #undef malloc
-
-/* Debug Mode */
-#undef sdf
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 #undef size_t

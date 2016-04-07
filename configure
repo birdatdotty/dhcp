@@ -721,6 +721,8 @@ enable_debug
 enable_nsupdate
 enable_nsupdate_server
 enable_nsupdate_end
+enable_kini_cmd
+enable_kini_pwd
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1355,6 +1357,8 @@ Optional Features:
   --enable-nsupdate="/usr/bin/nsupdate -g"
   --enable-nsupdate_server="127.0.0.1"
   --enable-nsupdate_end="send\n"
+  --enable-kini_cmd="/usr/bin/kinit"
+  --enable-kini_pwd="password"
 
 Some influential environment variables:
   CC          C compiler command
@@ -4475,8 +4479,7 @@ $as_echo "#define NDEBUG /**/" >>confdefs.h
 
     AM_CXXFLAGS="$AM_CXXFLAGS -O3"
 fi
-#AC_MSG_CHECKING([set nsupdate. Default "/usr/bin/nsupdate -g"])
-#AC_DEFINE([DEBUG],[],[Debug Mode])
+
 nsupdate_full="/usr/bin/nsupdate -g"
 # Check whether --enable-nsupdate was given.
 if test "${enable_nsupdate+set}" = set; then :
@@ -4498,7 +4501,19 @@ if test "${enable_nsupdate_end+set}" = set; then :
 fi
 
 
-#echo ${ENABLE_LIBADA}
+kini_cmd="/usr/bin/kinit"
+# Check whether --enable-kini_cmd was given.
+if test "${enable_kini_cmd+set}" = set; then :
+  enableval=$enable_kini_cmd; kini_cmd=$enableval
+fi
+
+
+# Check whether --enable-kini_pwd was given.
+if test "${enable_kini_pwd+set}" = set; then :
+  enableval=$enable_kini_pwd; kini_cmd=$enableval
+fi
+
+
 ##########################################################################
 # define
 
@@ -4511,14 +4526,20 @@ cat >>confdefs.h <<_ACEOF
 #define NSUPDATE_SERVER "$nsupdate_server"
 _ACEOF
 
-#AC_DEFINE([NSUPDATE], "nsupdate -g", [name command])
 
 cat >>confdefs.h <<_ACEOF
 #define NSUPDATE_END "$nsupdate_end"
 _ACEOF
 
 
-$as_echo "#define sdf asdas" >>confdefs.h
+cat >>confdefs.h <<_ACEOF
+#define KINIT_CMD "$kini_cmd"
+_ACEOF
+
+
+cat >>confdefs.h <<_ACEOF
+#define KINIT_PWD "$kini_pwd"
+_ACEOF
 
 
 ac_config_files="$ac_config_files Makefile"

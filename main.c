@@ -16,6 +16,7 @@
 #include "ip.h"
 #include "server.h"
 #include "config.h"
+#include "kinit.h"
 
 #define SIZE_STR 256
 
@@ -29,6 +30,7 @@ void nsupdate_add (struct host_ip *ip,
   #ifdef DEBUG
   puts (NSUPDATE_FULL);
   #endif
+  init_comand ();
   str = strdup (get_header_server(server));
   strcat (str, host_ip_dhcp_add_ip(ip, server, hostname));
   strcat (str, NSUPDATE_END);
@@ -40,14 +42,14 @@ void nsupdate_add (struct host_ip *ip,
   #endif
   FILE *nsupdate = popen (NSUPDATE_FULL, "w");
   #ifdef DEBUG
-  puts ("-i---------------");
+  puts ("-----------------");
   puts (str);
-  puts ("-i---------------");
+  puts ("-----------------");
   #endif
   fprintf (nsupdate, "%s", str);
   fflush (nsupdate);
   pclose (nsupdate);
-  sleep (1);
+//  sleep (1);
 //  execl (NSUPDATE_FULL, NSUPDATE, str, NULL);
 }
 
